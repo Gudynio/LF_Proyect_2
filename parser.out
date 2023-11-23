@@ -1,0 +1,107 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    IdValue
+    idEmail
+    idNombre
+    idTelefono
+    text
+    valueEmail
+    valueNombre
+    valueTelefono
+
+Grammar
+
+Rule 0     S' -> S
+Rule 1     S -> SBL A
+Rule 2     A -> keyId B
+Rule 3     B -> SBR C
+Rule 4     C -> <empty>
+
+Terminals, with rules where they appear
+
+IdValue              : 
+SBL                  : 1
+SBR                  : 3
+error                : 
+idEmail              : 
+idNombre             : 
+idTelefono           : 
+keyId                : 2
+text                 : 
+valueEmail           : 
+valueNombre          : 
+valueTelefono        : 
+
+Nonterminals, with rules where they appear
+
+A                    : 1
+B                    : 2
+C                    : 3
+S                    : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . S
+    (1) S -> . SBL A
+
+    SBL             shift and go to state 2
+
+    S                              shift and go to state 1
+
+state 1
+
+    (0) S' -> S .
+
+
+
+state 2
+
+    (1) S -> SBL . A
+    (2) A -> . keyId B
+
+    keyId           shift and go to state 4
+
+    A                              shift and go to state 3
+
+state 3
+
+    (1) S -> SBL A .
+
+    $end            reduce using rule 1 (S -> SBL A .)
+
+
+state 4
+
+    (2) A -> keyId . B
+    (3) B -> . SBR C
+
+    SBR             shift and go to state 6
+
+    B                              shift and go to state 5
+
+state 5
+
+    (2) A -> keyId B .
+
+    $end            reduce using rule 2 (A -> keyId B .)
+
+
+state 6
+
+    (3) B -> SBR . C
+    (4) C -> .
+
+    $end            reduce using rule 4 (C -> .)
+
+    C                              shift and go to state 7
+
+state 7
+
+    (3) B -> SBR C .
+
+    $end            reduce using rule 3 (B -> SBR C .)
+
