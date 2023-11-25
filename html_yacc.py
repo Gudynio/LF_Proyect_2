@@ -45,85 +45,35 @@ phones=[]
 
 #Se generan las reglas 
 def p_start(p):
-    'S : SBL A'
+    'S : SBL A SBR'
     p[0]=p[1]
 
-def p_nodeA(p):
-    'A : text B'
+def p_nodeA_A(p):
+    'A : B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B A'
     p[0] = p[1]
+    ids.insert(0,p[3])
+    names.insert(0,p[6])
+    emails.insert(0,p[9])
+    phones.insert(0,p[12])
 
-def p_nodeB_text(p):
+def p_nodeA_B(p):
+    'A : B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B'
+    p[0] = p[1]
+    ids.insert(0,p[3])
+    names.insert(0,p[6])
+    emails.insert(0,p[9])
+    phones.insert(0,p[12])
+
+def p_nodeB_B(p):
     'B : text B'
     p[0] = p[1]
 
-def p_nodeB_keyId(p):
-    'B : keyId C'
+def p_nodeB(p):
+    'B : text'
     p[0] = p[1]
-
-def p_nodeB_SBR(p):
-    'B : SBR M'
-    p[0] = p[1]
-
-def p_nodeC(p):
-    'C : idValue D'
-    p[0] = p[1]
-    ids.insert(0,p[0])
-
-def p_nodeD(p):
-    'D : text E'
-    p[0] = p[1]
-
-def p_nodeE_text(p):
-    'E : text E'
-    p[0] = p[1]
-
-def p_nodeE(p):
-    'E : idNombre F'
-    p[0] = p[1]
-
-
-def p_nodeF(p):
-    'F : valueNombre G'
-    p[0]=p[1]
-    names.insert(0,p[0])
-
-def p_nodeG(p):
-    'G : text H'
-    p[0] = p[1]
-
-def p_nodeH_text(p):
-    'H : text H'
-    p[0] = p[1]
-
-def p_nodeH(p):
-    'H : idEmail I'
-    p[0] = p[1]
-
-def p_nodeI(p):
-    'I : valueEmail J'
-    p[0] = p[1]
-    emails.insert(0,p[0])
-
-def p_nodeJ(p):
-    'J : text K'
-    p[0] = p[1]
-
-def p_nodeK_text(p):
-    'K : text K'
-    p[0] = p[1]
-
-def p_nodeK(p):
-    'K : idTelefono L'
-    p[0] = p[1]
-
-def p_nodeL(p):
-    'L : valueTelefono A'
-    p[0] = p[1]
-    phones.insert(0,p[0])
-    
 
 def p_end(p):
-    'M : '
+    'B : '
     p[0] = ""
 
 

@@ -3,56 +3,32 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Grammar
 
 Rule 0     S' -> S
-Rule 1     S -> SBL A
-Rule 2     A -> text B
-Rule 3     B -> text B
-Rule 4     B -> keyId C
-Rule 5     B -> SBR M
-Rule 6     C -> idValue D
-Rule 7     D -> text E
-Rule 8     E -> text E
-Rule 9     E -> idNombre F
-Rule 10    F -> valueNombre G
-Rule 11    G -> text H
-Rule 12    H -> text H
-Rule 13    H -> idEmail I
-Rule 14    I -> valueEmail J
-Rule 15    J -> text K
-Rule 16    K -> text K
-Rule 17    K -> idTelefono L
-Rule 18    L -> valueTelefono A
-Rule 19    M -> <empty>
+Rule 1     S -> SBL A SBR
+Rule 2     A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B A
+Rule 3     A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B
+Rule 4     B -> text B
+Rule 5     B -> text
+Rule 6     B -> <empty>
 
 Terminals, with rules where they appear
 
 SBL                  : 1
-SBR                  : 5
+SBR                  : 1
 error                : 
-idEmail              : 13
-idNombre             : 9
-idTelefono           : 17
-idValue              : 6
-keyId                : 4
-text                 : 2 3 7 8 11 12 15 16
-valueEmail           : 14
-valueNombre          : 10
-valueTelefono        : 18
+idEmail              : 2 3
+idNombre             : 2 3
+idTelefono           : 2 3
+idValue              : 2 3
+keyId                : 2 3
+text                 : 4 5
+valueEmail           : 2 3
+valueNombre          : 2 3
+valueTelefono        : 2 3
 
 Nonterminals, with rules where they appear
 
-A                    : 1 18
-B                    : 2 3
-C                    : 4
-D                    : 6
-E                    : 7 8
-F                    : 9
-G                    : 10
-H                    : 11 12
-I                    : 13
-J                    : 14
-K                    : 15 16
-L                    : 17
-M                    : 5
+A                    : 1 2
+B                    : 2 2 2 2 2 3 3 3 3 3 4
 S                    : 0
 
 Parsing method: LALR
@@ -60,7 +36,7 @@ Parsing method: LALR
 state 0
 
     (0) S' -> . S
-    (1) S -> . SBL A
+    (1) S -> . SBL A SBR
 
     SBL             shift and go to state 2
 
@@ -74,308 +50,225 @@ state 1
 
 state 2
 
-    (1) S -> SBL . A
-    (2) A -> . text B
+    (1) S -> SBL . A SBR
+    (2) A -> . B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B A
+    (3) A -> . B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B
+    (4) B -> . text B
+    (5) B -> . text
+    (6) B -> .
 
-    text            shift and go to state 4
+    text            shift and go to state 5
+    keyId           reduce using rule 6 (B -> .)
 
     A                              shift and go to state 3
+    B                              shift and go to state 4
 
 state 3
 
-    (1) S -> SBL A .
+    (1) S -> SBL A . SBR
 
-    $end            reduce using rule 1 (S -> SBL A .)
+    SBR             shift and go to state 6
 
 
 state 4
 
-    (2) A -> text . B
-    (3) B -> . text B
-    (4) B -> . keyId C
-    (5) B -> . SBR M
+    (2) A -> B . keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B A
+    (3) A -> B . keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B
 
-    text            shift and go to state 5
     keyId           shift and go to state 7
-    SBR             shift and go to state 8
 
-    B                              shift and go to state 6
 
 state 5
 
-    (3) B -> text . B
-    (3) B -> . text B
-    (4) B -> . keyId C
-    (5) B -> . SBR M
+    (4) B -> text . B
+    (5) B -> text .
+    (4) B -> . text B
+    (5) B -> . text
+    (6) B -> .
 
+  ! shift/reduce conflict for text resolved as shift
+  ! reduce/reduce conflict for keyId resolved using rule 5 (B -> text .)
+  ! reduce/reduce conflict for idNombre resolved using rule 5 (B -> text .)
+  ! reduce/reduce conflict for idEmail resolved using rule 5 (B -> text .)
+  ! reduce/reduce conflict for idTelefono resolved using rule 5 (B -> text .)
+  ! shift/reduce conflict for text resolved as shift
+  ! reduce/reduce conflict for SBR resolved using rule 5 (B -> text .)
+    keyId           reduce using rule 5 (B -> text .)
+    idNombre        reduce using rule 5 (B -> text .)
+    idEmail         reduce using rule 5 (B -> text .)
+    idTelefono      reduce using rule 5 (B -> text .)
+    SBR             reduce using rule 5 (B -> text .)
     text            shift and go to state 5
-    keyId           shift and go to state 7
-    SBR             shift and go to state 8
 
-    B                              shift and go to state 9
+  ! text            [ reduce using rule 5 (B -> text .) ]
+  ! keyId           [ reduce using rule 6 (B -> .) ]
+  ! idNombre        [ reduce using rule 6 (B -> .) ]
+  ! idEmail         [ reduce using rule 6 (B -> .) ]
+  ! idTelefono      [ reduce using rule 6 (B -> .) ]
+  ! text            [ reduce using rule 6 (B -> .) ]
+  ! SBR             [ reduce using rule 6 (B -> .) ]
+
+    B                              shift and go to state 8
 
 state 6
 
-    (2) A -> text B .
+    (1) S -> SBL A SBR .
 
-    $end            reduce using rule 2 (A -> text B .)
+    $end            reduce using rule 1 (S -> SBL A SBR .)
 
 
 state 7
 
-    (4) B -> keyId . C
-    (6) C -> . idValue D
+    (2) A -> B keyId . idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B A
+    (3) A -> B keyId . idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B
 
-    idValue         shift and go to state 11
+    idValue         shift and go to state 9
 
-    C                              shift and go to state 10
 
 state 8
 
-    (5) B -> SBR . M
-    (19) M -> .
+    (4) B -> text B .
 
-    $end            reduce using rule 19 (M -> .)
+    keyId           reduce using rule 4 (B -> text B .)
+    idNombre        reduce using rule 4 (B -> text B .)
+    idEmail         reduce using rule 4 (B -> text B .)
+    idTelefono      reduce using rule 4 (B -> text B .)
+    text            reduce using rule 4 (B -> text B .)
+    SBR             reduce using rule 4 (B -> text B .)
 
-    M                              shift and go to state 12
 
 state 9
 
-    (3) B -> text B .
+    (2) A -> B keyId idValue . B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B A
+    (3) A -> B keyId idValue . B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B
+    (4) B -> . text B
+    (5) B -> . text
+    (6) B -> .
 
-    $end            reduce using rule 3 (B -> text B .)
+    text            shift and go to state 5
+    idNombre        reduce using rule 6 (B -> .)
 
+    B                              shift and go to state 10
 
 state 10
 
-    (4) B -> keyId C .
+    (2) A -> B keyId idValue B . idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B A
+    (3) A -> B keyId idValue B . idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B
 
-    $end            reduce using rule 4 (B -> keyId C .)
+    idNombre        shift and go to state 11
 
 
 state 11
 
-    (6) C -> idValue . D
-    (7) D -> . text E
+    (2) A -> B keyId idValue B idNombre . valueNombre B idEmail valueEmail B idTelefono valueTelefono B A
+    (3) A -> B keyId idValue B idNombre . valueNombre B idEmail valueEmail B idTelefono valueTelefono B
 
-    text            shift and go to state 14
+    valueNombre     shift and go to state 12
 
-    D                              shift and go to state 13
 
 state 12
 
-    (5) B -> SBR M .
+    (2) A -> B keyId idValue B idNombre valueNombre . B idEmail valueEmail B idTelefono valueTelefono B A
+    (3) A -> B keyId idValue B idNombre valueNombre . B idEmail valueEmail B idTelefono valueTelefono B
+    (4) B -> . text B
+    (5) B -> . text
+    (6) B -> .
 
-    $end            reduce using rule 5 (B -> SBR M .)
+    text            shift and go to state 5
+    idEmail         reduce using rule 6 (B -> .)
 
+    B                              shift and go to state 13
 
 state 13
 
-    (6) C -> idValue D .
+    (2) A -> B keyId idValue B idNombre valueNombre B . idEmail valueEmail B idTelefono valueTelefono B A
+    (3) A -> B keyId idValue B idNombre valueNombre B . idEmail valueEmail B idTelefono valueTelefono B
 
-    $end            reduce using rule 6 (C -> idValue D .)
+    idEmail         shift and go to state 14
 
 
 state 14
 
-    (7) D -> text . E
-    (8) E -> . text E
-    (9) E -> . idNombre F
+    (2) A -> B keyId idValue B idNombre valueNombre B idEmail . valueEmail B idTelefono valueTelefono B A
+    (3) A -> B keyId idValue B idNombre valueNombre B idEmail . valueEmail B idTelefono valueTelefono B
 
-    text            shift and go to state 15
-    idNombre        shift and go to state 17
+    valueEmail      shift and go to state 15
 
-    E                              shift and go to state 16
 
 state 15
 
-    (8) E -> text . E
-    (8) E -> . text E
-    (9) E -> . idNombre F
+    (2) A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail . B idTelefono valueTelefono B A
+    (3) A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail . B idTelefono valueTelefono B
+    (4) B -> . text B
+    (5) B -> . text
+    (6) B -> .
 
-    text            shift and go to state 15
-    idNombre        shift and go to state 17
+    text            shift and go to state 5
+    idTelefono      reduce using rule 6 (B -> .)
 
-    E                              shift and go to state 18
+    B                              shift and go to state 16
 
 state 16
 
-    (7) D -> text E .
+    (2) A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B . idTelefono valueTelefono B A
+    (3) A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B . idTelefono valueTelefono B
 
-    $end            reduce using rule 7 (D -> text E .)
+    idTelefono      shift and go to state 17
 
 
 state 17
 
-    (9) E -> idNombre . F
-    (10) F -> . valueNombre G
+    (2) A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono . valueTelefono B A
+    (3) A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono . valueTelefono B
 
-    valueNombre     shift and go to state 20
+    valueTelefono   shift and go to state 18
 
-    F                              shift and go to state 19
 
 state 18
 
-    (8) E -> text E .
+    (2) A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono . B A
+    (3) A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono . B
+    (4) B -> . text B
+    (5) B -> . text
+    (6) B -> .
 
-    $end            reduce using rule 8 (E -> text E .)
+  ! shift/reduce conflict for text resolved as shift
+    text            shift and go to state 5
+    keyId           reduce using rule 6 (B -> .)
+    SBR             reduce using rule 6 (B -> .)
 
+  ! text            [ reduce using rule 6 (B -> .) ]
+
+    B                              shift and go to state 19
 
 state 19
 
-    (9) E -> idNombre F .
+    (2) A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B . A
+    (3) A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B .
+    (2) A -> . B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B A
+    (3) A -> . B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B
+    (4) B -> . text B
+    (5) B -> . text
+    (6) B -> .
 
-    $end            reduce using rule 9 (E -> idNombre F .)
+    SBR             reduce using rule 3 (A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B .)
+    text            shift and go to state 5
+    keyId           reduce using rule 6 (B -> .)
 
+    B                              shift and go to state 4
+    A                              shift and go to state 20
 
 state 20
 
-    (10) F -> valueNombre . G
-    (11) G -> . text H
-
-    text            shift and go to state 22
-
-    G                              shift and go to state 21
-
-state 21
-
-    (10) F -> valueNombre G .
-
-    $end            reduce using rule 10 (F -> valueNombre G .)
-
-
-state 22
-
-    (11) G -> text . H
-    (12) H -> . text H
-    (13) H -> . idEmail I
-
-    text            shift and go to state 23
-    idEmail         shift and go to state 25
-
-    H                              shift and go to state 24
-
-state 23
-
-    (12) H -> text . H
-    (12) H -> . text H
-    (13) H -> . idEmail I
-
-    text            shift and go to state 23
-    idEmail         shift and go to state 25
-
-    H                              shift and go to state 26
-
-state 24
-
-    (11) G -> text H .
-
-    $end            reduce using rule 11 (G -> text H .)
-
-
-state 25
-
-    (13) H -> idEmail . I
-    (14) I -> . valueEmail J
-
-    valueEmail      shift and go to state 28
-
-    I                              shift and go to state 27
-
-state 26
-
-    (12) H -> text H .
-
-    $end            reduce using rule 12 (H -> text H .)
-
-
-state 27
-
-    (13) H -> idEmail I .
-
-    $end            reduce using rule 13 (H -> idEmail I .)
-
-
-state 28
-
-    (14) I -> valueEmail . J
-    (15) J -> . text K
-
-    text            shift and go to state 30
-
-    J                              shift and go to state 29
-
-state 29
-
-    (14) I -> valueEmail J .
-
-    $end            reduce using rule 14 (I -> valueEmail J .)
-
-
-state 30
-
-    (15) J -> text . K
-    (16) K -> . text K
-    (17) K -> . idTelefono L
-
-    text            shift and go to state 31
-    idTelefono      shift and go to state 33
-
-    K                              shift and go to state 32
-
-state 31
-
-    (16) K -> text . K
-    (16) K -> . text K
-    (17) K -> . idTelefono L
-
-    text            shift and go to state 31
-    idTelefono      shift and go to state 33
-
-    K                              shift and go to state 34
-
-state 32
-
-    (15) J -> text K .
-
-    $end            reduce using rule 15 (J -> text K .)
-
-
-state 33
-
-    (17) K -> idTelefono . L
-    (18) L -> . valueTelefono A
-
-    valueTelefono   shift and go to state 36
-
-    L                              shift and go to state 35
-
-state 34
-
-    (16) K -> text K .
-
-    $end            reduce using rule 16 (K -> text K .)
-
-
-state 35
-
-    (17) K -> idTelefono L .
-
-    $end            reduce using rule 17 (K -> idTelefono L .)
-
-
-state 36
-
-    (18) L -> valueTelefono . A
-    (2) A -> . text B
-
-    text            shift and go to state 4
-
-    A                              shift and go to state 37
-
-state 37
-
-    (18) L -> valueTelefono A .
-
-    $end            reduce using rule 18 (L -> valueTelefono A .)
-
+    (2) A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B A .
+
+    SBR             reduce using rule 2 (A -> B keyId idValue B idNombre valueNombre B idEmail valueEmail B idTelefono valueTelefono B A .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for text in state 5 resolved as shift
+WARNING: shift/reduce conflict for text in state 5 resolved as shift
+WARNING: shift/reduce conflict for text in state 18 resolved as shift
+WARNING: reduce/reduce conflict in state 5 resolved using rule (B -> text)
+WARNING: rejected rule (B -> <empty>) in state 5
