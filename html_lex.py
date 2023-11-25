@@ -6,7 +6,7 @@ InteractiveShell.ast_node_interactivity = "all"
 
 import re
 
-with open('CV-Json.json') as doc1: 
+with open('JSONTEST.json') as doc1: 
     text = doc1.read()     # por default se abre como sólo lectura doc = open("Data/Example1.txt", 'r') 
     
 doc1.close() # qué pasa si abrimos y no cerramos el archivo?
@@ -21,7 +21,7 @@ tokens = (
     'SBL',
     'SBR',
     'keyId',
-    'IdValue',
+    'idValue',
     'idNombre',
     'valueNombre',
     'idEmail',
@@ -40,7 +40,7 @@ tokens = (
 t_SBL = r"\["
 t_SBR = r"\]"
 t_keyId= r"\"id\":[ ]*"
-t_IdValue=r"[0-9]+"
+t_idValue=r"[0-9]+"
 t_idNombre=r"\"name\":[ ]*"
 t_valueNombre="\"[A-Z][A-Z,a-z,á-ú]+[ ]*[A-Z][A-Z,a-z,á-ú]+\""
 t_idEmail=r"\"email\":[ ]*"
@@ -68,7 +68,7 @@ t_ignore  = ' \t'
 
 # Para el manejo de errores en las entradas
 def t_error(t):
-    print('Illegal character', t.value[0])
+    #print('Illegal character', t.value[0])
     t.lexer.skip(1)
 
 
@@ -104,7 +104,7 @@ if input_str != '':
  ##
 for tok in lexer:
     valx=1
-    #print(tok)
+    print(tok)
  ##
  ### La salida de cada tok tiene el siguiente formato:
  ### LexToken(type of token, token, line number, position)

@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'SBLSBRkeyIdIdValueidNombrevalueNombreidEmailvalueEmailidTelefonovalueTelefonotextIdValue SBL SBR idEmail idNombre idTelefono keyId text valueEmail valueNombre valueTelefonoS : SBL A A : keyId BB : SBR CC : '
+_lr_signature = 'SBLSBRkeyIdidValueidNombrevalueNombreidEmailvalueEmailidTelefonovalueTelefonotextSBL SBR idEmail idNombre idTelefono idValue keyId text valueEmail valueNombre valueTelefonoS : SBL AA : text BB : text BB : keyId CB : SBR MC : idValue DD : text EE : text EE : idNombre FF : valueNombre GG : text HH : text HH : idEmail II : valueEmail JJ : text KK : text KK : idTelefono LL : valueTelefono AM : '
     
-_lr_action_items = {'SBL':([0,],[2,]),'$end':([1,3,5,6,7,],[0,-1,-2,-4,-3,]),'keyId':([2,],[4,]),'SBR':([4,],[6,]),}
+_lr_action_items = {'SBL':([0,],[2,]),'$end':([1,3,6,8,9,10,12,13,16,18,19,21,24,26,27,29,32,34,35,37,],[0,-1,-2,-19,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-16,-17,-18,]),'text':([2,4,5,11,14,15,20,22,23,28,30,31,36,],[4,5,5,14,15,15,22,23,23,30,31,31,4,]),'keyId':([4,5,],[7,7,]),'SBR':([4,5,],[8,8,]),'idValue':([7,],[11,]),'idNombre':([14,15,],[17,17,]),'valueNombre':([17,],[20,]),'idEmail':([22,23,],[25,25,]),'valueEmail':([25,],[28,]),'idTelefono':([30,31,],[33,33,]),'valueTelefono':([33,],[36,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'S':([0,],[1,]),'A':([2,],[3,]),'B':([4,],[5,]),'C':([6,],[7,]),}
+_lr_goto_items = {'S':([0,],[1,]),'A':([2,36,],[3,37,]),'B':([4,5,],[6,9,]),'C':([7,],[10,]),'M':([8,],[12,]),'D':([11,],[13,]),'E':([14,15,],[16,18,]),'F':([17,],[19,]),'G':([20,],[21,]),'H':([22,23,],[24,26,]),'I':([25,],[27,]),'J':([28,],[29,]),'K':([30,31,],[32,34,]),'L':([33,],[35,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,8 +27,23 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> S","S'",1,None,None,None),
-  ('S -> SBL A','S',2,'p_start','html_yacc.py',26),
-  ('A -> keyId B','A',2,'p_keyId','html_yacc.py',31),
-  ('B -> SBR C','B',2,'p_SBR','html_yacc.py',37),
-  ('C -> <empty>','C',0,'p_end','html_yacc.py',42),
+  ('S -> SBL A','S',2,'p_start','html_yacc.py',35),
+  ('A -> text B','A',2,'p_nodeA','html_yacc.py',42),
+  ('B -> text B','B',2,'p_nodeB_text','html_yacc.py',47),
+  ('B -> keyId C','B',2,'p_nodeB_keyId','html_yacc.py',52),
+  ('B -> SBR M','B',2,'p_nodeB_SBR','html_yacc.py',57),
+  ('C -> idValue D','C',2,'p_nodeC','html_yacc.py',62),
+  ('D -> text E','D',2,'p_nodeD','html_yacc.py',67),
+  ('E -> text E','E',2,'p_nodeE_text','html_yacc.py',72),
+  ('E -> idNombre F','E',2,'p_nodeE','html_yacc.py',77),
+  ('F -> valueNombre G','F',2,'p_nodeF','html_yacc.py',82),
+  ('G -> text H','G',2,'p_nodeG','html_yacc.py',87),
+  ('H -> text H','H',2,'p_nodeH_text','html_yacc.py',92),
+  ('H -> idEmail I','H',2,'p_nodeH','html_yacc.py',97),
+  ('I -> valueEmail J','I',2,'p_nodeI','html_yacc.py',102),
+  ('J -> text K','J',2,'p_nodeJ','html_yacc.py',107),
+  ('K -> text K','K',2,'p_nodeK_text','html_yacc.py',112),
+  ('K -> idTelefono L','K',2,'p_nodeK','html_yacc.py',117),
+  ('L -> valueTelefono A','L',2,'p_nodeL','html_yacc.py',122),
+  ('M -> <empty>','M',0,'p_end','html_yacc.py',127),
 ]
