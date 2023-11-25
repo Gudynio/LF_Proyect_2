@@ -1,4 +1,4 @@
-    # PARTE 1: TOKENIZAR LA ENTRADA USANDO LEX
+# PARTE 1: TOKENIZAR LA ENTRADA USANDO LEX
 import ply.lex as lex
 
 from IPython.core.interactiveshell import InteractiveShell
@@ -6,7 +6,7 @@ InteractiveShell.ast_node_interactivity = "all"
 
 import re
 
-with open('JSONTEST.json') as doc1: 
+with open('CV-Json.json') as doc1: 
     text = doc1.read()     # por default se abre como sólo lectura doc = open("Data/Example1.txt", 'r') 
     
 doc1.close() # qué pasa si abrimos y no cerramos el archivo?
@@ -41,12 +41,12 @@ t_SBL = r"\["
 t_SBR = r"\]"
 t_keyId= r"\"id\":[ ]*"
 t_idValue=r"[0-9]+"
-t_idNombre=r"\"name\":[ ]*"
-t_valueNombre="\"[A-Z][A-Z,a-z,á-ú]+[ ]*[A-Z][A-Z,a-z,á-ú]+\""
-t_idEmail=r"\"email\":[ ]*"
-t_valueEmail=r"\"[A-Z,a-z,0-9]*@[A-Z,a-z,\.]*\""
-t_idTelefono=r"\"phone\":[ ]*"
-t_valueTelefono=r"\"\([0-9]*\)[ ,0-9]*\""
+t_idNombre=r"\"name\":[ ]*\""
+t_valueNombre="[A-Z][A-Z,a-z,á-ú]+[ ]*[A-Z][A-Z,a-z,á-ú]+"
+t_idEmail=r"\"email\":[ ]*\""
+t_valueEmail=r"[A-Z,a-z,0-9]*@[A-Z,a-z,\.]*"
+t_idTelefono=r"\"phone\":[ ]*\""
+t_valueTelefono=r"\([0-9]*\)[ ,0-9]*"
 t_text=r'.+'
 
 
@@ -89,7 +89,7 @@ lexer = lex.lex()
 
 input_str = text
 
-
+"""
 print('Para terminar introduce ENTER --- ')
  ##
  ### Paso 5. Usar el objeto tipo lex para tokenizar la entrada
@@ -108,3 +108,4 @@ for tok in lexer:
  ##
  ### La salida de cada tok tiene el siguiente formato:
  ### LexToken(type of token, token, line number, position)
+"""
